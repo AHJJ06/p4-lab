@@ -1,0 +1,93 @@
+mininet> sh ./p4cli s2 "table_modify MyIngress.myTunnel_exact MyIngress.myTunnel_forward 2 1"
+Done
+Modifying entry 2 for exact match table MyIngress.myTunnel_exact
+
+mininet> sh ./p4cli s2 "table_dump MyIngress.myTunnel_exact"
+Done
+==========
+TABLE ENTRIES
+**********
+Dumping entry 0x0
+Match key:
+* myTunnel.dst_id     : EXACT     0001
+Action entry: MyIngress.myTunnel_forward - 01
+**********
+Dumping entry 0x1
+Match key:
+* myTunnel.dst_id     : EXACT     0002
+Action entry: MyIngress.myTunnel_forward - 02
+**********
+Dumping entry 0x2
+Match key:
+* myTunnel.dst_id     : EXACT     0003
+Action entry: MyIngress.myTunnel_forward - 01
+==========
+Dumping default entry
+Action entry: MyIngress.drop - 
+==========
+
+mininet> sh truncate -s 0 logs/s1.txt logs/s2.txt
+
+mininet> h1 python3 send.py 10.39.0.3 "loop" --tunnel 3 --hops 16
+###[ Ethernet ]### 
+  dst       = ff:ff:ff:ff:ff:ff
+  src       = 00:00:00:00:00:01
+  type      = 0x1212
+###[ MyTunnel ]### 
+     proto_id  = 2048
+     dst_id    = 3
+     hop_limit = 16
+###[ IP ]### 
+        version   = 4
+        ihl       = 5
+        tos       = 0x0
+        len       = 32
+        id        = 1
+        flags     = 
+        frag      = 0
+        ttl       = 64
+        proto     = udp
+        chksum    = 0x667b
+        src       = 10.39.0.1
+        dst       = 10.39.0.3
+        \options   \
+###[ UDP ]### 
+           sport     = 4321
+           dport     = 4321
+           len       = 12
+           chksum    = 0xede2
+###[ Raw ]### 
+              load      = 'loop'
+
+Sent from h1-eth0.
+
+mininet> sh grep -c "hop_limit = hdr.myTunnel.hop_limit - 1" logs/s1.txt
+8
+
+mininet> sh grep -c "hop_limit = hdr.myTunnel.hop_limit - 1" logs/s2.txt
+8
+
+mininet> sh grep -c "Processing packet received" logs/s1.txt
+9
+
+mininet> sh grep -c "Processing packet received" logs/s2.txt
+8
+
+mininet> sh grep -n -E "mark_to_drop|hop_limit|drop" logs/s1.txt logs/s2.txt
+logs/s1.txt:31:[12:59:29.958] [bmv2] [T] [thread 2920] [9.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:74:[12:59:29.960] [bmv2] [T] [thread 2920] [10.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:117:[12:59:29.964] [bmv2] [T] [thread 2920] [11.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:160:[12:59:29.969] [bmv2] [T] [thread 2920] [12.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:203:[12:59:29.973] [bmv2] [T] [thread 2920] [13.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:246:[12:59:29.977] [bmv2] [T] [thread 2920] [14.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:289:[12:59:29.980] [bmv2] [T] [thread 2920] [15.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:332:[12:59:29.984] [bmv2] [T] [thread 2920] [16.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s1.txt:375:[12:59:29.987] [bmv2] [T] [thread 2920] [17.0] [cxt 0] tunnel.p4(116) Primitive mark_to_drop(standard_metadata)
+logs/s2.txt:31:[12:59:29.959] [bmv2] [T] [thread 2938] [9.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s2.txt:74:[12:59:29.963] [bmv2] [T] [thread 2938] [10.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s2.txt:117:[12:59:29.966] [bmv2] [T] [thread 2938] [11.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s2.txt:160:[12:59:29.971] [bmv2] [T] [thread 2938] [12.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s2.txt:203:[12:59:29.975] [bmv2] [T] [thread 2938] [13.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s2.txt:246:[12:59:29.978] [bmv2] [T] [thread 2938] [14.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s2.txt:289:[12:59:29.982] [bmv2] [T] [thread 2938] [15.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+logs/s2.txt:332:[12:59:29.986] [bmv2] [T] [thread 2938] [16.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1

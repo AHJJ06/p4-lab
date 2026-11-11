@@ -1,0 +1,199 @@
+=== C5 Mixed-version rollout ===
+S1: New tunnel.p4 | S2: Old tunnel_v1.p4
+
+=== H2 packet capture ===
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on h2-eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+
+0 packets captured
+0 packets received by filter
+0 packets dropped by kernel
+
+=== S1 and S2 processing counts ===
+S1:
+17
+S2:
+16
+
+=== S1 hop-limit decrement and drop ===
+31:[13:09:24.500] [bmv2] [T] [thread 24262] [1.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+74:[13:09:24.502] [bmv2] [T] [thread 24262] [2.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+117:[13:09:24.504] [bmv2] [T] [thread 24262] [3.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+160:[13:09:24.508] [bmv2] [T] [thread 24262] [4.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+203:[13:09:24.511] [bmv2] [T] [thread 24262] [5.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+246:[13:09:24.516] [bmv2] [T] [thread 24262] [6.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+289:[13:09:24.520] [bmv2] [T] [thread 24262] [7.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+332:[13:09:24.523] [bmv2] [T] [thread 24262] [8.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+375:[13:09:24.525] [bmv2] [T] [thread 24262] [9.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+418:[13:09:24.528] [bmv2] [T] [thread 24262] [10.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+461:[13:09:24.533] [bmv2] [T] [thread 24262] [11.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+504:[13:09:24.537] [bmv2] [T] [thread 24262] [12.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+547:[13:09:24.540] [bmv2] [T] [thread 24262] [13.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+590:[13:09:24.544] [bmv2] [T] [thread 24262] [14.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+633:[13:09:24.547] [bmv2] [T] [thread 24262] [15.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+676:[13:09:24.551] [bmv2] [T] [thread 24262] [16.0] [cxt 0] tunnel.p4(119) Primitive hdr.myTunnel.hop_limit = hdr.myTunnel.hop_limit - 1
+719:[13:09:24.554] [bmv2] [T] [thread 24262] [17.0] [cxt 0] tunnel.p4(116) Primitive mark_to_drop(standard_metadata)
+
+=== S2 packet processing ===
+1:[13:09:24.500] [bmv2] [D] [thread 24279] [1.0] [cxt 0] Processing packet received on port 1
+42:[13:09:24.502] [bmv2] [D] [thread 24279] [2.0] [cxt 0] Processing packet received on port 1
+83:[13:09:24.505] [bmv2] [D] [thread 24279] [3.0] [cxt 0] Processing packet received on port 1
+124:[13:09:24.509] [bmv2] [D] [thread 24279] [4.0] [cxt 0] Processing packet received on port 1
+165:[13:09:24.513] [bmv2] [D] [thread 24279] [5.0] [cxt 0] Processing packet received on port 1
+206:[13:09:24.517] [bmv2] [D] [thread 24279] [6.0] [cxt 0] Processing packet received on port 1
+247:[13:09:24.521] [bmv2] [D] [thread 24279] [7.0] [cxt 0] Processing packet received on port 1
+288:[13:09:24.523] [bmv2] [D] [thread 24279] [8.0] [cxt 0] Processing packet received on port 1
+329:[13:09:24.527] [bmv2] [D] [thread 24279] [9.0] [cxt 0] Processing packet received on port 1
+370:[13:09:24.530] [bmv2] [D] [thread 24279] [10.0] [cxt 0] Processing packet received on port 1
+411:[13:09:24.535] [bmv2] [D] [thread 24279] [11.0] [cxt 0] Processing packet received on port 1
+452:[13:09:24.537] [bmv2] [D] [thread 24279] [12.0] [cxt 0] Processing packet received on port 1
+493:[13:09:24.541] [bmv2] [D] [thread 24279] [13.0] [cxt 0] Processing packet received on port 1
+534:[13:09:24.545] [bmv2] [D] [thread 24279] [14.0] [cxt 0] Processing packet received on port 1
+575:[13:09:24.548] [bmv2] [D] [thread 24279] [15.0] [cxt 0] Processing packet received on port 1
+616:[13:09:24.552] [bmv2] [D] [thread 24279] [16.0] [cxt 0] Processing packet received on port 1
+
+=== S2 parsing and forwarding ===
+7:[13:09:24.500] [bmv2] [D] [thread 24279] [1.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+9:[13:09:24.500] [bmv2] [D] [thread 24279] [1.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+11:[13:09:24.500] [bmv2] [D] [thread 24279] [1.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+13:[13:09:24.500] [bmv2] [D] [thread 24279] [1.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+20:* hdr.myTunnel.dst_id : 0003
+25:* hdr.myTunnel.dst_id : EXACT     0003
+26:Action entry: MyIngress.myTunnel_forward - 1,
+28:[13:09:24.501] [bmv2] [D] [thread 24279] [1.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+29:[13:09:24.501] [bmv2] [T] [thread 24279] [1.0] [cxt 0] Action MyIngress.myTunnel_forward
+48:[13:09:24.502] [bmv2] [D] [thread 24279] [2.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+50:[13:09:24.502] [bmv2] [D] [thread 24279] [2.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+52:[13:09:24.502] [bmv2] [D] [thread 24279] [2.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+54:[13:09:24.502] [bmv2] [D] [thread 24279] [2.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+61:* hdr.myTunnel.dst_id : 0003
+66:* hdr.myTunnel.dst_id : EXACT     0003
+67:Action entry: MyIngress.myTunnel_forward - 1,
+69:[13:09:24.503] [bmv2] [D] [thread 24279] [2.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+70:[13:09:24.503] [bmv2] [T] [thread 24279] [2.0] [cxt 0] Action MyIngress.myTunnel_forward
+89:[13:09:24.506] [bmv2] [D] [thread 24279] [3.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+91:[13:09:24.506] [bmv2] [D] [thread 24279] [3.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+93:[13:09:24.506] [bmv2] [D] [thread 24279] [3.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+95:[13:09:24.506] [bmv2] [D] [thread 24279] [3.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+102:* hdr.myTunnel.dst_id : 0003
+107:* hdr.myTunnel.dst_id : EXACT     0003
+108:Action entry: MyIngress.myTunnel_forward - 1,
+110:[13:09:24.506] [bmv2] [D] [thread 24279] [3.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+111:[13:09:24.506] [bmv2] [T] [thread 24279] [3.0] [cxt 0] Action MyIngress.myTunnel_forward
+130:[13:09:24.509] [bmv2] [D] [thread 24279] [4.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+132:[13:09:24.509] [bmv2] [D] [thread 24279] [4.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+134:[13:09:24.510] [bmv2] [D] [thread 24279] [4.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+136:[13:09:24.510] [bmv2] [D] [thread 24279] [4.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+143:* hdr.myTunnel.dst_id : 0003
+148:* hdr.myTunnel.dst_id : EXACT     0003
+149:Action entry: MyIngress.myTunnel_forward - 1,
+151:[13:09:24.510] [bmv2] [D] [thread 24279] [4.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+152:[13:09:24.510] [bmv2] [T] [thread 24279] [4.0] [cxt 0] Action MyIngress.myTunnel_forward
+171:[13:09:24.514] [bmv2] [D] [thread 24279] [5.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+173:[13:09:24.514] [bmv2] [D] [thread 24279] [5.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+175:[13:09:24.514] [bmv2] [D] [thread 24279] [5.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+177:[13:09:24.514] [bmv2] [D] [thread 24279] [5.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+184:* hdr.myTunnel.dst_id : 0003
+189:* hdr.myTunnel.dst_id : EXACT     0003
+190:Action entry: MyIngress.myTunnel_forward - 1,
+192:[13:09:24.514] [bmv2] [D] [thread 24279] [5.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+193:[13:09:24.514] [bmv2] [T] [thread 24279] [5.0] [cxt 0] Action MyIngress.myTunnel_forward
+212:[13:09:24.517] [bmv2] [D] [thread 24279] [6.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+214:[13:09:24.517] [bmv2] [D] [thread 24279] [6.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+216:[13:09:24.517] [bmv2] [D] [thread 24279] [6.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+218:[13:09:24.518] [bmv2] [D] [thread 24279] [6.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+225:* hdr.myTunnel.dst_id : 0003
+230:* hdr.myTunnel.dst_id : EXACT     0003
+231:Action entry: MyIngress.myTunnel_forward - 1,
+233:[13:09:24.518] [bmv2] [D] [thread 24279] [6.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+234:[13:09:24.518] [bmv2] [T] [thread 24279] [6.0] [cxt 0] Action MyIngress.myTunnel_forward
+253:[13:09:24.521] [bmv2] [D] [thread 24279] [7.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+255:[13:09:24.521] [bmv2] [D] [thread 24279] [7.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+257:[13:09:24.521] [bmv2] [D] [thread 24279] [7.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+259:[13:09:24.521] [bmv2] [D] [thread 24279] [7.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+266:* hdr.myTunnel.dst_id : 0003
+271:* hdr.myTunnel.dst_id : EXACT     0003
+272:Action entry: MyIngress.myTunnel_forward - 1,
+274:[13:09:24.522] [bmv2] [D] [thread 24279] [7.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+275:[13:09:24.522] [bmv2] [T] [thread 24279] [7.0] [cxt 0] Action MyIngress.myTunnel_forward
+294:[13:09:24.523] [bmv2] [D] [thread 24279] [8.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+296:[13:09:24.523] [bmv2] [D] [thread 24279] [8.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+298:[13:09:24.523] [bmv2] [D] [thread 24279] [8.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+300:[13:09:24.523] [bmv2] [D] [thread 24279] [8.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+307:* hdr.myTunnel.dst_id : 0003
+312:* hdr.myTunnel.dst_id : EXACT     0003
+313:Action entry: MyIngress.myTunnel_forward - 1,
+315:[13:09:24.524] [bmv2] [D] [thread 24279] [8.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+316:[13:09:24.524] [bmv2] [T] [thread 24279] [8.0] [cxt 0] Action MyIngress.myTunnel_forward
+335:[13:09:24.527] [bmv2] [D] [thread 24279] [9.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+337:[13:09:24.527] [bmv2] [D] [thread 24279] [9.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+339:[13:09:24.527] [bmv2] [D] [thread 24279] [9.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+341:[13:09:24.527] [bmv2] [D] [thread 24279] [9.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+348:* hdr.myTunnel.dst_id : 0003
+353:* hdr.myTunnel.dst_id : EXACT     0003
+354:Action entry: MyIngress.myTunnel_forward - 1,
+356:[13:09:24.527] [bmv2] [D] [thread 24279] [9.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+357:[13:09:24.527] [bmv2] [T] [thread 24279] [9.0] [cxt 0] Action MyIngress.myTunnel_forward
+376:[13:09:24.530] [bmv2] [D] [thread 24279] [10.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+378:[13:09:24.530] [bmv2] [D] [thread 24279] [10.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+380:[13:09:24.530] [bmv2] [D] [thread 24279] [10.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+382:[13:09:24.531] [bmv2] [D] [thread 24279] [10.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+389:* hdr.myTunnel.dst_id : 0003
+394:* hdr.myTunnel.dst_id : EXACT     0003
+395:Action entry: MyIngress.myTunnel_forward - 1,
+397:[13:09:24.531] [bmv2] [D] [thread 24279] [10.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+398:[13:09:24.531] [bmv2] [T] [thread 24279] [10.0] [cxt 0] Action MyIngress.myTunnel_forward
+417:[13:09:24.535] [bmv2] [D] [thread 24279] [11.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+419:[13:09:24.535] [bmv2] [D] [thread 24279] [11.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+421:[13:09:24.535] [bmv2] [D] [thread 24279] [11.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+423:[13:09:24.535] [bmv2] [D] [thread 24279] [11.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+430:* hdr.myTunnel.dst_id : 0003
+435:* hdr.myTunnel.dst_id : EXACT     0003
+436:Action entry: MyIngress.myTunnel_forward - 1,
+438:[13:09:24.535] [bmv2] [D] [thread 24279] [11.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+439:[13:09:24.535] [bmv2] [T] [thread 24279] [11.0] [cxt 0] Action MyIngress.myTunnel_forward
+458:[13:09:24.538] [bmv2] [D] [thread 24279] [12.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+460:[13:09:24.538] [bmv2] [D] [thread 24279] [12.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+462:[13:09:24.538] [bmv2] [D] [thread 24279] [12.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+464:[13:09:24.538] [bmv2] [D] [thread 24279] [12.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+471:* hdr.myTunnel.dst_id : 0003
+476:* hdr.myTunnel.dst_id : EXACT     0003
+477:Action entry: MyIngress.myTunnel_forward - 1,
+479:[13:09:24.539] [bmv2] [D] [thread 24279] [12.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+480:[13:09:24.539] [bmv2] [T] [thread 24279] [12.0] [cxt 0] Action MyIngress.myTunnel_forward
+499:[13:09:24.541] [bmv2] [D] [thread 24279] [13.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+501:[13:09:24.541] [bmv2] [D] [thread 24279] [13.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+503:[13:09:24.541] [bmv2] [D] [thread 24279] [13.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+505:[13:09:24.542] [bmv2] [D] [thread 24279] [13.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+512:* hdr.myTunnel.dst_id : 0003
+517:* hdr.myTunnel.dst_id : EXACT     0003
+518:Action entry: MyIngress.myTunnel_forward - 1,
+520:[13:09:24.542] [bmv2] [D] [thread 24279] [13.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+521:[13:09:24.542] [bmv2] [T] [thread 24279] [13.0] [cxt 0] Action MyIngress.myTunnel_forward
+540:[13:09:24.545] [bmv2] [D] [thread 24279] [14.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+542:[13:09:24.545] [bmv2] [D] [thread 24279] [14.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+544:[13:09:24.545] [bmv2] [D] [thread 24279] [14.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+546:[13:09:24.545] [bmv2] [D] [thread 24279] [14.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+553:* hdr.myTunnel.dst_id : 0003
+558:* hdr.myTunnel.dst_id : EXACT     0003
+559:Action entry: MyIngress.myTunnel_forward - 1,
+561:[13:09:24.546] [bmv2] [D] [thread 24279] [14.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+562:[13:09:24.546] [bmv2] [T] [thread 24279] [14.0] [cxt 0] Action MyIngress.myTunnel_forward
+581:[13:09:24.548] [bmv2] [D] [thread 24279] [15.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+583:[13:09:24.548] [bmv2] [D] [thread 24279] [15.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+585:[13:09:24.548] [bmv2] [D] [thread 24279] [15.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+587:[13:09:24.548] [bmv2] [D] [thread 24279] [15.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+594:* hdr.myTunnel.dst_id : 0003
+599:* hdr.myTunnel.dst_id : EXACT     0003
+600:Action entry: MyIngress.myTunnel_forward - 1,
+602:[13:09:24.549] [bmv2] [D] [thread 24279] [15.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+603:[13:09:24.549] [bmv2] [T] [thread 24279] [15.0] [cxt 0] Action MyIngress.myTunnel_forward
+622:[13:09:24.552] [bmv2] [D] [thread 24279] [16.0] [cxt 0] Parser 'parser' entering state 'parse_myTunnel'
+624:[13:09:24.552] [bmv2] [D] [thread 24279] [16.0] [cxt 0] Parser state 'parse_myTunnel': key is 0800
+626:[13:09:24.552] [bmv2] [D] [thread 24279] [16.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+628:[13:09:24.552] [bmv2] [D] [thread 24279] [16.0] [cxt 0] Parser state 'parse_ipv4' has no switch, going to default next state
+635:* hdr.myTunnel.dst_id : 0003
+640:* hdr.myTunnel.dst_id : EXACT     0003
+641:Action entry: MyIngress.myTunnel_forward - 1,
+643:[13:09:24.552] [bmv2] [D] [thread 24279] [16.0] [cxt 0] Action entry is MyIngress.myTunnel_forward - 1,
+644:[13:09:24.552] [bmv2] [T] [thread 24279] [16.0] [cxt 0] Action MyIngress.myTunnel_forward
