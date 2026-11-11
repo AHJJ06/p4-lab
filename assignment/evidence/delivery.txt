@@ -1,0 +1,82 @@
+mininet> h1 python3 send.py 10.39.0.2 "hello h2" --tunnel 2 --hops 16
+###[ Ethernet ]### 
+  dst       = ff:ff:ff:ff:ff:ff
+  src       = 00:00:00:00:00:01
+  type      = 0x1212
+###[ MyTunnel ]### 
+     proto_id  = 2048
+     dst_id    = 2
+     hop_limit = 16
+###[ IP ]### 
+        version   = 4
+        ihl       = 5
+        tos       = 0x0
+        len       = 36
+        id        = 1
+        flags     = 
+        frag      = 0
+        ttl       = 64
+        proto     = udp
+        chksum    = 0x6678
+        src       = 10.39.0.1
+        dst       = 10.39.0.2
+        \options   \
+###[ UDP ]### 
+           sport     = 4321
+           dport     = 4321
+           len       = 16
+           chksum    = 0x1d97
+###[ Raw ]### 
+              load      = 'hello h2'
+
+Sent from h1-eth0.
+
+mininet> sh cat logs/h2.txt
+Listening on h2-eth0...
+Received (tunnelled, dst_id=2, hop_limit=14) from 10.39.0.1 to 10.39.0.2, TTL 64: 'hello h2'
+
+mininet> h1 python3 send.py 10.39.0.3 "hello h3" --tunnel 3 --hops 16
+###[ Ethernet ]### 
+  dst       = ff:ff:ff:ff:ff:ff
+  src       = 00:00:00:00:00:01
+  type      = 0x1212
+###[ MyTunnel ]### 
+     proto_id  = 2048
+     dst_id    = 3
+     hop_limit = 16
+###[ IP ]### 
+        version   = 4
+        ihl       = 5
+        tos       = 0x0
+        len       = 36
+        id        = 1
+        flags     = 
+        frag      = 0
+        ttl       = 64
+        proto     = udp
+        chksum    = 0x6677
+        src       = 10.39.0.1
+        dst       = 10.39.0.3
+        \options   \
+###[ UDP ]### 
+           sport     = 4321
+           dport     = 4321
+           len       = 16
+           chksum    = 0x1d95
+###[ Raw ]### 
+              load      = 'hello h3'
+
+Sent from h1-eth0.
+
+mininet> sh cat logs/h3.txt
+Listening on h3-eth0...
+Received (tunnelled, dst_id=3, hop_limit=14) from 10.39.0.1 to 10.39.0.3, TTL 64: 'hello h3'
+
+mininet> h1 ping -c 2 h3
+PING 10.39.0.3 (10.39.0.3) 56(84) bytes of data.
+64 bytes from 10.39.0.3: icmp_seq=1 ttl=62 time=5.92 ms
+64 bytes from 10.39.0.3: icmp_seq=2 ttl=62 time=7.91 ms
+
+--- 10.39.0.3 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 5.922/6.915/7.909/0.993 ms
