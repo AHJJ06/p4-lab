@@ -1,0 +1,20 @@
+=== Loop After: Hop Limit Protection ===
+Initial hop limit: 16
+
+=== Packet processing counts ===
+S1:
+9
+S2:
+8
+
+=== Hop-limit decrements ===
+S1:
+8
+S2:
+8
+
+=== Drop event ===
+logs/s1.txt:375:[13:30:58.083] [bmv2] [T] [thread 2524] [8.0] [cxt 0] tunnel.p4(116) Primitive mark_to_drop(standard_metadata)
+
+=== Conclusion ===
+The packet was dropped when the hop limit reached zero.
